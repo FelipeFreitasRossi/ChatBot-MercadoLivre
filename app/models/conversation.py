@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, DateTime, Enum, ForeignKey
+from sqlalchemy import Column, Integer, String, DateTime, Enum, ForeignKey, Boolean
 from sqlalchemy.orm import relationship
 from sqlalchemy.sql import func
 from app.database.connection import Base
@@ -10,6 +10,8 @@ class Conversation(Base):
     customer_id = Column(Integer, ForeignKey("customers.id"), nullable=False)
     channel = Column(String(20), nullable=False)
     status = Column(Enum('active', 'handoff', 'closed', name='conv_status'), default='active')
+    stage = Column(Enum('greeting', 'asking_need', 'recommending', 'checkout', 'done', name='conv_stage'), default='greeting')
+    greeting_sent = Column(Boolean, default=False)
     started_at = Column(DateTime, server_default=func.now())
     ended_at = Column(DateTime, nullable=True)
     last_message_at = Column(DateTime, server_default=func.now(), onupdate=func.now())
