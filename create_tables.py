@@ -1,10 +1,11 @@
+#!/usr/bin/env python
 from app.database.connection import engine, Base
-from app.models import Customer, Conversation, Message  # importa para registrar
+from app.models import Customer, Conversation, Message
 
-def main():
-    print("Creating tables...")
+def create_tables():
+    print("Criando tabelas no banco de dados...")
     Base.metadata.create_all(bind=engine)
-    print("Tables created successfully.")
+    print("Tabelas criadas com sucesso!")
 
 if __name__ == "__main__":
-    main()
+    create_tables()

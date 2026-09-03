@@ -1,4 +1,5 @@
-from sqlalchemy import Column, Integer, String, DateTime, func
+from sqlalchemy import Column, Integer, String, DateTime, UniqueConstraint
+from sqlalchemy.sql import func
 from app.database.connection import Base
 
 class Customer(Base):
@@ -13,4 +14,6 @@ class Customer(Base):
     created_at = Column(DateTime, server_default=func.now())
     updated_at = Column(DateTime, server_default=func.now(), onupdate=func.now())
 
-    __table_args__ = (UniqueConstraint('channel', 'external_id', name='uq_customer_channel_external'),)
+    __table_args__ = (
+        UniqueConstraint('channel', 'external_id', name='uq_customer_channel_external'),
+    )

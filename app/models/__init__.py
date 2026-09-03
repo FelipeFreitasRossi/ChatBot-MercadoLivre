@@ -1,3 +1,5 @@
-from .customer import Customer
-from .conversation import Conversation, ConversationStatus
-from .message import Message, MessageDirection
+from app.models.customer import Customer
+from app.models.conversation import Conversation
+from app.models.message import Message
+
+__all__ = ["Customer", "Conversation", "Message"]
